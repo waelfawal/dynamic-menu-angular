@@ -9,6 +9,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatDialogModule} from "@angular/material/dialog";
 import {SharedModule} from "../shared/shared.module";
 import {FormsModule} from "@angular/forms";
+import {ToastrModule} from "ngx-toastr";
 
 
 
@@ -25,7 +26,7 @@ import {FormsModule} from "@angular/forms";
     MatInputModule,
     MatDialogModule,
     SharedModule,
-    FormsModule
+    FormsModule,
   ],
 
   exports: [

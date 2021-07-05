@@ -7,6 +7,7 @@ import {MenuModel} from "../../Models/menu.model";
 import {MenuService} from "../../Services/menu.service";
 import {DeleteConfirmDialogComponent} from "../../shared/delete-confirm-dialog/delete-confirm-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
+import {ToastrService} from "ngx-toastr";
 
 export class MenuItemFlatNode {
   name!: string;
@@ -36,10 +37,8 @@ export class ManageMenuComponent {
 
   dataSource: MatTreeFlatDataSource<MenuModel, MenuItemFlatNode>;
 
-  /** The selection for checklist */
-  checklistSelection = new SelectionModel<MenuItemFlatNode>(true /* multiple */);
 
-  constructor(private menuService: MenuService, private dialog: MatDialog) {
+  constructor(private menuService: MenuService, private dialog: MatDialog, private toastr: ToastrService) {
     this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel,
       this.isExpandable, this.getChildren);
     this.treeControl = new FlatTreeControl<MenuItemFlatNode>(this.getLevel, this.isExpandable);
@@ -133,24 +132,23 @@ export class ManageMenuComponent {
       this.menuService.data.splice(index,1);
       this.menuService.dataChange.next(this.menuService.data);
     }
-    // const index = parentNode!.children.findIndex((child:MenuModel) => node.name === child.name && node.link === child.link);
-    // console.log(index);
-    // if (index !== -1) {
-    //   parentNode!.children.splice(index, 1);
-    //   this.menuService.dataChange.next(this.menuService.data);
-    //   this.flatNodeMap.delete(node);
-    // }
+    this.toastr.success('Item Successfully Deleted');
   }
 
   saveNode(node: MenuItemFlatNode, itemName: string, itemLink: string) {
     const nestedNode = this.flatNodeMap.get(node);
     this.menuService.updateItem(nestedNode!, itemName, itemLink);
+    this.toastr.success('Item Successfully Saved');
+
   }
   addNewRoot(itemName: string,itemLink:string) {
     this.menuService.addNewRootItem(itemName, itemLink);
+    this.toastr.success('Menu Successfully Added');
     this.isAdd = false;
   }
   saveMenu() {
     this.menuService.saveMenu();
+    this.toastr.success('Menu Successfully Saved');
+
   }
 }
