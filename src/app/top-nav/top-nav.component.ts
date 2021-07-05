@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NavService} from "../Services/nav.service";
+import {MenuService} from "../Services/menu.service";
 
 @Component({
   selector: 'app-top-nav',
@@ -8,7 +9,7 @@ import {NavService} from "../Services/nav.service";
 })
 export class TopNavComponent implements OnInit {
 
-  constructor(public navService: NavService) { }
+  constructor(public navService: NavService, public menuService: MenuService) { }
 
   ngOnInit(): void {
   }

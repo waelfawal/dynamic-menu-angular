@@ -3,4 +3,18 @@
     <mat-icon>menu</mat-icon>
   </button>
   <span>Dynamic Menu</span>
+
+
+  <ng-container *ngFor="let menuItem of menuService.data">
+    <ng-container *ngIf="menuItem.children.length > 0; else navigateButton">
+      <button mat-button [matMenuTriggerFor]="panel.menu"><h6 class="d-flex align-items-center">{{menuItem.name}}<mat-icon>      expand_more
+      </mat-icon></h6></button>
+      <app-my-mat-menu #panel [items]="menuItem.children"></app-my-mat-menu>
+    </ng-container>
+    <ng-template #navigateButton>
+      <a [href]="menuItem.link" target="_blank" mat-button class="d-flex align-items-center">
+        <h6>{{menuItem.name}}</h6>
+      </a>
+    </ng-template>
+  </ng-container>
 </mat-toolbar>

@@ -16,12 +16,15 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {NavService} from "./Services/nav.service";
 import {MatListModule} from "@angular/material/list";
 import {FlexLayoutModule} from "@angular/flex-layout";
+import { MyMatMenuComponent } from './my-mat-menu/my-mat-menu.component';
+import {MatMenuModule} from "@angular/material/menu";
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuListItemComponent,
-    TopNavComponent
+    TopNavComponent,
+    MyMatMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,8 @@ import {FlexLayoutModule} from "@angular/flex-layout";
     MatToolbarModule,
     MatListModule,
     FlexLayoutModule,
-    MenuModule
+    MenuModule,
+    MatMenuModule
   ],
   providers: [NavService],
   bootstrap: [AppComponent]

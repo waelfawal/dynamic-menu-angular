@@ -1,0 +1,9 @@
+<mat-menu #menu>
+  <ng-container *ngFor="let item of items">
+    <a [href]="item.link" target="_blank"><button *ngIf="!item.children; else branch" mat-menu-item>{{item.name}}</button></a>
+    <ng-template #branch>
+      <button mat-menu-item [matMenuTriggerFor]="innerPanel.menu">{{item.name}}</button>
+      <app-my-mat-menu #innerPanel [items]="item.children"></app-my-mat-menu>
+    </ng-template>
+  </ng-container>
+</mat-menu>
