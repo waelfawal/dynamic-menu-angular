@@ -18,13 +18,15 @@ import {MatListModule} from "@angular/material/list";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import { MyMatMenuComponent } from './my-mat-menu/my-mat-menu.component';
 import {MatMenuModule} from "@angular/material/menu";
+import { MainComponent } from './main/main.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuListItemComponent,
     TopNavComponent,
-    MyMatMenuComponent
+    MyMatMenuComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
