@@ -8,3 +8,17 @@ padding: 0;
 .green-color {
   color: green;
 }
+
+.bg-gray {
+  background-color: #fafafa;
+}
+
+
+.mat-tree-node::before {
+  height: 3rem;
+  position:absolute;
+  left: 0;
+  right: 0;
+  border-bottom: #EEE 1px solid;
+  content: ' ';
+}

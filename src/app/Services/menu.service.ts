@@ -26,6 +26,7 @@ export class MenuService {
     return this.dataChange.value;
   }
 
+
   constructor() {
     this.initialize();
   }
@@ -33,6 +34,7 @@ export class MenuService {
   initialize() {
     // Build the tree nodes from Json object. The result is a list of `MenuModel` with nested
     //     file node as children.
+    this.getMenu();
     const data = this.TREE_DATA;
 
     // Notify the change.
@@ -60,5 +62,16 @@ export class MenuService {
       children: []
     });
     this.dataChange.next(this.data);
+  }
+  saveMenu() {
+    localStorage.setItem('menu', JSON.stringify(this.data))
+  }
+  getMenu() {
+    const menu = JSON.parse(localStorage.getItem('menu')!);
+    if(menu) {
+      this.TREE_DATA = menu
+    } else {
+      this.TREE_DATA = [];
+    }
   }
 }

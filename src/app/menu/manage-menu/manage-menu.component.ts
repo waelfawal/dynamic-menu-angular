@@ -148,5 +148,9 @@ export class ManageMenuComponent {
   }
   addNewRoot(itemName: string,itemLink:string) {
     this.menuService.addNewRootItem(itemName, itemLink);
+    this.isAdd = false;
+  }
+  saveMenu() {
+    this.menuService.saveMenu();
   }
 }

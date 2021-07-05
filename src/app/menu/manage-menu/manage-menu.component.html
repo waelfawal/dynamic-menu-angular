@@ -1,85 +1,92 @@
-<div class="container ">
-  <button mat-raised-button color="primary" (click)="isAdd = true">Add New Item</button>
-  <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+<div class="bg-gray">
+  <div class="container p-5">
+    <h1>Welcome</h1>
 
-    <mat-tree-node *matTreeNodeDef="let node; when: hasNoContent" matTreeNodePadding>
-      <div class="d-flex align-items-center">
-        <mat-form-field appearance="outline" class="p-1">
-          <mat-label>Name</mat-label>
-          <input matInput #itemName>
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="p-1">
-          <mat-label>Link</mat-label>
-          <input matInput #itemLink>
-        </mat-form-field>
-        <button mat-icon-button (click)="saveNode(node, itemName.value, itemLink.value)">
-          <mat-icon color="primary">save</mat-icon>
-        </button>
-        <button mat-icon-button (click)="deleteItem(node)">
-          <mat-icon color="warn">close</mat-icon>
-        </button>
+    <button mat-raised-button color="primary" class="my-3" (click)="isAdd = true">Add New Item</button>
+    <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="position-relative">
 
-      </div>
-    </mat-tree-node>
+      <mat-tree-node *matTreeNodeDef="let node; when: hasNoContent" matTreeNodePadding>
+        <div class="d-flex align-items-center">
+          <mat-form-field appearance="outline" class="p-1">
+            <mat-label>Name</mat-label>
+            <input matInput #itemName>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="p-1">
+            <mat-label>Link</mat-label>
+            <input matInput #itemLink>
+          </mat-form-field>
+          <button mat-icon-button (click)="saveNode(node, itemName.value, itemLink.value)">
+            <mat-icon color="primary">save</mat-icon>
+          </button>
+          <button mat-icon-button (click)="deleteItem(node)">
+            <mat-icon color="warn">close</mat-icon>
+          </button>
 
-    <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
-      <button mat-icon-button disabled *ngIf="!node.hasChild"></button>
-      <button *ngIf="node.hasChild" mat-icon-button matTreeNodeToggle
-              [attr.aria-label]="'Toggle ' + node.name">
-        <mat-icon class="mat-icon-rtl-mirror">
-          {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-        </mat-icon>
-      </button>
-      <div class="d-flex align-items-center" *ngIf="node.editMode; else normalMode">
-        <mat-form-field appearance="outline" class="p-1">
-          <mat-label>Name</mat-label>
-          <input matInput [(ngModel)]="node.name">
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="p-1">
-          <mat-label>Link</mat-label>
-          <input matInput [(ngModel)]="node.link">
-        </mat-form-field>
-        <button mat-icon-button (click)="saveNode(node, node.name, node.link)">
-          <mat-icon color="primary">save</mat-icon>
-        </button>
-        <button mat-icon-button (click)="node.editMode = false">
-          <mat-icon color="warn">close</mat-icon>
-        </button>
-
-      </div>
-      <ng-template #normalMode>
-        <div class="">
-          <h4 class="d-block mb-0"> {{node.name}}</h4>
-          <h5 class="d-block">{{node.link}}</h5>
         </div>
-        <div *ngIf="!node.hasChild" class="pad"></div>
-        <button mat-icon-button (click)="addNewItem(node)">
-          <mat-icon class="green-color">add</mat-icon>
-        </button>
-        <button mat-icon-button (click)="node.editMode = true">
-          <mat-icon color="primary">edit</mat-icon>
-        </button>
-        <button mat-icon-button (click)="openConfirmDeleteDialog(node)">
-          <mat-icon color="warn">delete</mat-icon>
-        </button>
-      </ng-template>
-    </mat-tree-node>
-  </mat-tree>
-  <div class="d-flex align-items-center" *ngIf="isAdd">
-    <mat-form-field appearance="outline" class="p-1">
-      <mat-label>Name</mat-label>
-      <input matInput #newItemName>
-    </mat-form-field>
-    <mat-form-field appearance="outline" class="p-1">
-      <mat-label>Link</mat-label>
-      <input matInput #newItemLink>
-    </mat-form-field>
-    <button mat-icon-button (click)="addNewRoot(newItemName.value, newItemLink.value)">
-      <mat-icon color="primary">save</mat-icon>
-    </button>
-    <button mat-icon-button (click)="isAdd = false">
-      <mat-icon color="warn">close</mat-icon>
-    </button>
+      </mat-tree-node>
 
+      <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+        <button mat-icon-button disabled *ngIf="!node.hasChild"></button>
+        <button *ngIf="node.hasChild" mat-icon-button matTreeNodeToggle
+                [attr.aria-label]="'Toggle ' + node.name">
+          <mat-icon class="mat-icon-rtl-mirror">
+            {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+          </mat-icon>
+        </button>
+        <div class="d-flex align-items-center" *ngIf="node.editMode; else normalMode">
+          <mat-form-field appearance="outline" class="p-1">
+            <mat-label>Name</mat-label>
+            <input matInput [(ngModel)]="node.name">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="p-1">
+            <mat-label>Link</mat-label>
+            <input matInput [(ngModel)]="node.link">
+          </mat-form-field>
+          <button mat-icon-button (click)="saveNode(node, node.name, node.link)">
+            <mat-icon color="primary">save</mat-icon>
+          </button>
+          <button mat-icon-button (click)="node.editMode = false">
+            <mat-icon color="warn">close</mat-icon>
+          </button>
+
+        </div>
+        <ng-template #normalMode>
+          <div class="">
+            <h4 class="d-block mb-0"> {{node.name}}</h4>
+            <h5 class="d-block">{{node.link}}</h5>
+          </div>
+          <div>
+            <div *ngIf="!node.hasChild" class="pad"></div>
+            <button mat-icon-button (click)="addNewItem(node)">
+              <mat-icon class="green-color">add</mat-icon>
+            </button>
+            <button mat-icon-button (click)="node.editMode = true">
+              <mat-icon color="primary">edit</mat-icon>
+            </button>
+            <button mat-icon-button (click)="openConfirmDeleteDialog(node)">
+              <mat-icon color="warn">delete</mat-icon>
+            </button>
+          </div>
+        </ng-template>
+      </mat-tree-node>
+    </mat-tree>
+    <div class="d-flex align-items-center" *ngIf="isAdd">
+      <mat-form-field appearance="outline" class="p-1">
+        <mat-label>Name</mat-label>
+        <input matInput #newItemName>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="p-1">
+        <mat-label>Link</mat-label>
+        <input matInput #newItemLink>
+      </mat-form-field>
+      <button mat-icon-button (click)="addNewRoot(newItemName.value, newItemLink.value)">
+        <mat-icon color="primary">save</mat-icon>
+      </button>
+      <button mat-icon-button (click)="isAdd = false">
+        <mat-icon color="warn">close</mat-icon>
+      </button>
+
+    </div>
+    <button mat-raised-button color="primary" (click)="saveMenu()">Save Menu</button>
   </div>
 </div>
