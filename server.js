@@ -8,9 +8,9 @@ function requireHTTPS(req, res, next) {
 const express = require('express');
 const app = express();
 app.use(requireHTTPS);
-app.use(express.static('./dist/FacebookFans'));
+app.use(express.static('./dist/dynamic-menu'));
   app.get('/*', function(req, res) {
-    res.sendFile('index.html', {root: 'dist/FacebookFans/'}
+    res.sendFile('index.html', {root: 'dist/dynamic-menu/'}
     );
   });
   console.log('test');
