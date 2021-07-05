@@ -21,7 +21,7 @@ export class MenuItemFlatNode {
 @Component({
   selector: 'app-manage-menu',
   templateUrl: './manage-menu.component.html',
-  styleUrls: ['./manage-menu.component.css']
+  styleUrls: ['./manage-menu.component.scss']
 })
 export class ManageMenuComponent {
   /** Map from flat node to nested node. This helps us finding the nested node to be modified */
