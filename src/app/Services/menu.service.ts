@@ -47,10 +47,18 @@ export class MenuService {
     this.dataChange.next(this.data);
   }
 
-
   updateItem(node: MenuModel, name: string, link: string) {
     node.name = name;
     node.link = link;
+    this.dataChange.next(this.data);
+  }
+
+  addNewRootItem(name: string, link: string) {
+    this.data.push({
+      name: name,
+      link: link,
+      children: []
+    });
     this.dataChange.next(this.data);
   }
 }

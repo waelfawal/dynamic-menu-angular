@@ -29,12 +29,7 @@ export class ManageMenuComponent {
   /** Map from nested node to flattened node. This helps us to keep the same object for selection */
   nestedNodeMap = new Map<MenuModel, MenuItemFlatNode>();
 
-  /** A selected parent node to be inserted */
-  selectedParent: MenuItemFlatNode | null = null;
-
-  /** The new item's name */
-  newItemName = '';
-
+  isAdd = false;
   treeControl: FlatTreeControl<MenuItemFlatNode>;
 
   treeFlattener: MatTreeFlattener<MenuModel, MenuItemFlatNode>;
@@ -150,5 +145,8 @@ export class ManageMenuComponent {
   saveNode(node: MenuItemFlatNode, itemName: string, itemLink: string) {
     const nestedNode = this.flatNodeMap.get(node);
     this.menuService.updateItem(nestedNode!, itemName, itemLink);
+  }
+  addNewRoot(itemName: string,itemLink:string) {
+    this.menuService.addNewRootItem(itemName, itemLink);
   }
 }
