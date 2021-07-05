@@ -8,6 +8,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatDialogModule} from "@angular/material/dialog";
 import {SharedModule} from "../shared/shared.module";
+import {FormsModule} from "@angular/forms";
 
 
 
@@ -23,7 +24,8 @@ import {SharedModule} from "../shared/shared.module";
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
-    SharedModule
+    SharedModule,
+    FormsModule
   ],
 
   exports: [

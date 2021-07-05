@@ -1,39 +1,60 @@
-
 <div class="container ">
 
-<mat-tree [dataSource]="dataSource" [treeControl]="treeControl" >
+  <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
 
-  <mat-tree-node *matTreeNodeDef="let node; when: hasNoContent" matTreeNodePadding>
-    <div class="d-flex align-items-center">
-    <mat-form-field appearance="outline" class="p-1">
-      <mat-label>Name</mat-label>
-      <input matInput #itemName>
-    </mat-form-field>
-    <mat-form-field appearance="outline" class="p-1">
-      <mat-label>Link</mat-label>
-      <input matInput #itemLink>
-    </mat-form-field>
-      <button mat-icon-button (click)="saveNode(node, itemName.value, itemLink.value)"><mat-icon color="primary">save</mat-icon></button>
-    </div>
-  </mat-tree-node>
+    <mat-tree-node *matTreeNodeDef="let node; when: hasNoContent" matTreeNodePadding>
+      <div class="d-flex align-items-center">
+        <mat-form-field appearance="outline" class="p-1">
+          <mat-label>Name</mat-label>
+          <input matInput #itemName>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="p-1">
+          <mat-label>Link</mat-label>
+          <input matInput #itemLink>
+        </mat-form-field>
+        <button mat-icon-button (click)="saveNode(node, itemName.value, itemLink.value)">
+          <mat-icon color="primary">save</mat-icon>
+        </button>
+      </div>
+    </mat-tree-node>
 
-  <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding >
-    <button mat-icon-button disabled *ngIf="!node.hasChild"></button>
-
-    <button *ngIf="node.hasChild" mat-icon-button matTreeNodeToggle
-            [attr.aria-label]="'Toggle ' + node.name">
-      <mat-icon class="mat-icon-rtl-mirror">
-        {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-      </mat-icon>
-    </button>
-    <div class="">
-      <h4 class="d-block mb-0"> {{node.name}}</h4>
-      <h5 class="d-block">{{node.link}}</h5>
-    </div>
-    <div *ngIf="!node.hasChild" class="pad"></div>
-    <button mat-icon-button (click)="addNewItem(node)"><mat-icon class="green-color">add</mat-icon></button>
-    <button mat-icon-button (click)="addNewItem(node)"><mat-icon color="primary">edit</mat-icon></button>
-    <button mat-icon-button (click)="openConfirmDeleteDialog(node)"><mat-icon color="warn">delete</mat-icon></button>
-  </mat-tree-node>
-</mat-tree>
+    <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+      <button mat-icon-button disabled *ngIf="!node.hasChild"></button>
+      <button *ngIf="node.hasChild" mat-icon-button matTreeNodeToggle
+              [attr.aria-label]="'Toggle ' + node.name">
+        <mat-icon class="mat-icon-rtl-mirror">
+          {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+        </mat-icon>
+      </button>
+      <div class="d-flex align-items-center" *ngIf="node.editMode; else normalMode">
+        <mat-form-field appearance="outline" class="p-1">
+          <mat-label>Name</mat-label>
+          <input matInput [(ngModel)]="node.name">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="p-1">
+          <mat-label>Link</mat-label>
+          <input matInput [(ngModel)]="node.link">
+        </mat-form-field>
+        <button mat-icon-button (click)="saveNode(node, node.name, node.link)">
+          <mat-icon color="primary">save</mat-icon>
+        </button>
+      </div>
+      <ng-template #normalMode>
+        <div class="">
+          <h4 class="d-block mb-0"> {{node.name}}</h4>
+          <h5 class="d-block">{{node.link}}</h5>
+        </div>
+        <div *ngIf="!node.hasChild" class="pad"></div>
+        <button mat-icon-button (click)="addNewItem(node)">
+          <mat-icon class="green-color">add</mat-icon>
+        </button>
+        <button mat-icon-button (click)="node.editMode = true">
+          <mat-icon color="primary">edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="openConfirmDeleteDialog(node)">
+          <mat-icon color="warn">delete</mat-icon>
+        </button>
+      </ng-template>
+    </mat-tree-node>
+  </mat-tree>
 </div>

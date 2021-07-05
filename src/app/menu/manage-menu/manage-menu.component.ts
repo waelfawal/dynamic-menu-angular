@@ -12,7 +12,8 @@ export class MenuItemFlatNode {
   name!: string;
   level!: number;
   expandable!: boolean;
-  link!: string
+  link!: string;
+  editMode!: boolean;
   hasChild!: boolean;
 }
 
@@ -74,6 +75,7 @@ export class ManageMenuComponent {
     flatNode.link = node.link;
     flatNode.level = level;
     flatNode.expandable = true;
+    flatNode.editMode = false;
     flatNode.hasChild = !!node.children?.length;
     this.flatNodeMap.set(flatNode, node);
     this.nestedNodeMap.set(node, flatNode);
@@ -81,28 +83,6 @@ export class ManageMenuComponent {
   }
 
 
-  /* Checks all the parents when a leaf node is selected/unselected */
-  checkAllParentsSelection(node: MenuItemFlatNode): void {
-    let parent: MenuItemFlatNode | null = this.getParentNode(node);
-    while (parent) {
-      this.checkRootNodeSelection(parent);
-      parent = this.getParentNode(parent);
-    }
-  }
-
-  /** Check root node checked state and change it accordingly */
-  checkRootNodeSelection(node: MenuItemFlatNode): void {
-    const nodeSelected = this.checklistSelection.isSelected(node);
-    const descendants = this.treeControl.getDescendants(node);
-    const descAllSelected = descendants.length > 0 && descendants.every(child => {
-      return this.checklistSelection.isSelected(child);
-    });
-    if (nodeSelected && !descAllSelected) {
-      this.checklistSelection.deselect(node);
-    } else if (!nodeSelected && descAllSelected) {
-      this.checklistSelection.select(node);
-    }
-  }
 
   /* Get the parent node of a node */
   getParentNode(node: MenuItemFlatNode): MenuItemFlatNode | null {
