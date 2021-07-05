@@ -1,0 +1,10 @@
+.pad {
+  width: 40px;
+}
+::ng-deep .mat-form-field-wrapper {
+padding: 0;
+}
+
+.green-color {
+  color: green;
+}
